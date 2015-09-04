@@ -55,6 +55,6 @@ function! FMLShow()
 endfunction
 
 " Open Leader mapping in VSplit
-nnoremap <Leader>lm :call FMLShow()<CR>
+nnoremap <Leader>fml :call FMLShow()<CR>
 
 
