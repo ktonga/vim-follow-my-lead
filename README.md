@@ -1,6 +1,6 @@
 Follow My Lead
 ==============
-Vim plugin for showing all your <Leader> mappings in a readable table including the descriptions.
+Vim plugin for showing all your `<Leader>` mappings in a readable table including the descriptions.
 
 Installation
 ------------
@@ -14,13 +14,13 @@ Plugin 'ktonga/vim-follow-my-lead'
 
 Features
 --------
-* Look for mappings (only to <Leader>) in scripts sourced by Vim
+* Look for mappings (only to `<Leader>`) in scripts sourced by Vim
 * By default only `.vimrc` is used. It honours `$MYVIMRC` variable.
 * All sourced vim scripts can be used if specified by configuration (see Options)
 * If the line previous to the mapping is a comment it will be used as the description
 * Mappings are shown in a table with the following columns
   * Mode: which mode the mapping applies to
-  * LHS: left hand side of the mapping (without <Leader>)
+  * LHS: left hand side of the mapping (without `<Leader>`)
   * Description: The mapping comment if present
 
 Screenshots
