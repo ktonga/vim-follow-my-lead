@@ -14,22 +14,23 @@ Plugin 'ktonga/vim-follow-my-lead'
 
 Features
 --------
-* Look for mappings (only to `<Leader>`) in scripts sourced by Vim
-* By default only `.vimrc` is used. It honours `$MYVIMRC` variable.
-* All sourced vim scripts can be used if specified by configuration (see Options)
+* List `<Leader>` mappings defined by the user and the plugins
+* By default only mappings defined in `.vimrc` are listed. It honours `$MYVIMRC` variable
+* Mappings from all scripts sourced by Vim can be listed if specified by configuration (see Options)
 * If the line previous to the mapping is a comment it will be used as the description
-* Mappings are shown in a table with the following columns
+* If no comment is available the **rhs** of the mapping is used as description
+* Mappings are shown in a table, grouped by **source**, with the following columns
   * Mode: which mode the mapping applies to
   * LHS: left hand side of the mapping (without `<Leader>`)
-  * Description: The mapping comment if present
+  * Description: The mapping comment if present. The **rhs** otherwise
 
 Screenshots
 -----------
-![FML screenshot](http://drive.google.com/uc?export=download&id=0BxOk4ZkCuP9uUV9WbktDSV9fSG8)
+![FML screenshot](http://drive.google.com/uc?export=download&id=0BxOk4ZkCuP9uaHZyRGJwbllTVGc)
 
 Shortcuts
 ---------
-* `<Leader>fml`: Default mapping for triggering the plugin. It shows the mapping in a vertical split
+* `<Leader>fml`: Default mapping for triggering the plugin. It shows the mapping in a new window
 * `q`: Closes the mappings window
 
 Options
