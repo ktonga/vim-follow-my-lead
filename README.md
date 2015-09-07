@@ -36,7 +36,7 @@ Shortcuts
 Options
 -------
 * `g:fml_all_sources`: if `1` all sources are used, if `0` just `$MYVIMRC` is used. Default `0`
-* _More options comming soon_
+* _More options coming soon_
 
 License
 -------
