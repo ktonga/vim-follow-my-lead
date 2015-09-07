@@ -79,10 +79,17 @@ function! FMLShow()
   let formattedMappings = join(map(FMLGetLeaderMappingsBySource(), 'FMLFormatMappings(v:val.source, v:val.mappings)'), "\n\n")
 
   new
-  nnoremap <buffer> <silent> q :bdelete!<cr>
-  put =formattedMappings
+  " Make it an unlisted scratch buffer
+  setlocal buftype=nofile
+  setlocal bufhidden=hide
+  setlocal noswapfile
+  setlocal nobuflisted
 
+  nnoremap <buffer> <silent> q :bdelete<cr>
+
+  put =formattedMappings
   normal! gg
+
 endfunction
 
 " Open Leader mappings in new window
