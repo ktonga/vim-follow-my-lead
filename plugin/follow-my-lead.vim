@@ -78,14 +78,20 @@ endfunction
 function! FMLShow()
   let formattedMappings = join(map(FMLGetLeaderMappingsBySource(), 'FMLFormatMappings(v:val.source, v:val.mappings)'), "\n\n")
 
-  new
-  " Make it an unlisted scratch buffer
-  setlocal buftype=nofile
-  setlocal bufhidden=hide
-  setlocal noswapfile
-  setlocal nobuflisted
+  if(exists('s:fml_bufnr'))
+    execute bufwinnr(s:fml_bufnr) . 'wincmd w'
+    execute 'normal ggdG'
+  else
+    new
+    " Make it an unlisted scratch buffer
+    setlocal buftype=nofile
+    setlocal bufhidden=hide
+    setlocal noswapfile
+    setlocal nobuflisted
 
-  nnoremap <buffer> <silent> q :bdelete<cr>
+    nnoremap <buffer> <silent> q :bdelete<cr>
+    let s:fml_bufnr = bufnr('%')
+  endif
 
   put =formattedMappings
   normal! gg
