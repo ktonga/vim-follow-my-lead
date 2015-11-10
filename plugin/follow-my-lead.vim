@@ -75,6 +75,11 @@ function! FMLFormatMappings(source, mappings)
   return a:source. "\n" . repeat('-', strchars(a:source)) . "\n\n" . join(formatted, "\n")
 endfunction
 
+function FMLClose()
+  unlet s:fml_bufnr
+  bdelete
+endfunction
+
 function! FMLShow()
   let formattedMappings = join(map(FMLGetLeaderMappingsBySource(), 'FMLFormatMappings(v:val.source, v:val.mappings)'), "\n\n")
 
@@ -89,7 +94,7 @@ function! FMLShow()
     setlocal noswapfile
     setlocal nobuflisted
 
-    nnoremap <buffer> <silent> q :bdelete<cr>
+    nnoremap <buffer> <silent> q :call FMLClose()<cr>
     let s:fml_bufnr = bufnr('%')
   endif
 
