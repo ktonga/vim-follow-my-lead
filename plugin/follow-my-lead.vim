@@ -50,24 +50,24 @@ endfunction
 function! FMLParseMapping(mapping_line)
   let pattern = '\V\^\(\a\| \)\s\+' . s:fml_escaped_leader . '\(\S\+\)\s\+\%(*\| \)\%(@\| \)\(\.\+\)'
   let groups = matchlist(a:mapping_line, pattern)
-  return { 'mode': groups[1], 'lhs': groups[2], 'rhs': groups[3] }
+  return { 'id': substitute(groups[1] . '_' . groups[2], ' ', '', ''), 'mode': groups[1], 'lhs': groups[2], 'rhs': groups[3] }
 endfunction
 
 function! FMLAddDescription(src, mappings)
   let src_lines = readfile(glob(a:src))
   let lines_with_index = map(deepcopy(src_lines), '[v:key, v:val]') 
-  let comments_by_lhs = {}
+  let comments_by_id = {}
   for [idx, line] in lines_with_index
-    let lhs = matchlist(line, '\c\m^\a*map.*<leader>\(\S\+\)')
+    let lhs = matchlist(line, '\c\m^\(\a*\)map.*<leader>\(\S\+\)')
     if(!empty(lhs))
       let prev_line = src_lines[idx - 1]
       let comment = matchlist(prev_line, '^"\s*\(.*\)')
       if(!empty(comment))
-        let comments_by_lhs[lhs[1]] = comment[1]
+        let comments_by_id[lhs[1] . '_' . lhs[2]] = comment[1]
       endif
     endif
   endfor
-  return map(a:mappings, 'has_key(comments_by_lhs, v:val.lhs) ? extend(v:val, {"desc": comments_by_lhs[v:val.lhs]}) : v:val')
+  return map(a:mappings, 'has_key(comments_by_id, v:val.id) ? extend(v:val, {"desc": comments_by_id[v:val.id]}) : v:val')
 endfunction
 
 function! FMLFormatMappings(source, mappings)
