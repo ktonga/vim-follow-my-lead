@@ -75,7 +75,7 @@ function! FMLFormatMappings(source, mappings)
   return a:source. "\n" . repeat('-', strchars(a:source)) . "\n\n" . join(formatted, "\n")
 endfunction
 
-function FMLClose()
+function! FMLClose()
   unlet s:fml_bufnr
   bdelete
 endfunction
