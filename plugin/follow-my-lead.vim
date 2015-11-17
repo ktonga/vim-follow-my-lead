@@ -10,9 +10,12 @@ let s:fml_escaped_leader = escape(s:fml_leader, '\')
 
 function! FMLGetLeaderMappingsBySource()
   let all_maps = ""
+  let old_lang = v:lang
+  lang message C
   redir => all_maps
   silent execute "verbose map"
   redir END
+  silent execute "lang message" old_lang
   let lines = split(all_maps, "\n")
   let linesLen = len(lines)
   let mappings_by_source = {}
