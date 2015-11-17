@@ -31,11 +31,11 @@ function! FMLGetLeaderMappingsBySource()
   endwhile
   let with_desc = map(mappings_by_source, 'FMLAddDescription(v:key, reverse(v:val))')
   if(exists("s:vimrc_glob"))
-		let vimrc_val = remove(with_desc, s:vimrc_glob)
-		let vimrc_first = [{ 'source': s:vimrc_glob, 'mappings': vimrc_val }]
-	else
-		let vimrc_first = []
-	endif
+    let vimrc_val = remove(with_desc, s:vimrc_glob)
+    let vimrc_first = [{ 'source': s:vimrc_glob, 'mappings': vimrc_val }]
+  else
+    let vimrc_first = []
+  endif
   let vimrc_first += values(map(with_desc, '{ "source": v:key, "mappings": v:val }'))
   return vimrc_first
 endfunction
