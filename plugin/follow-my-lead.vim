@@ -65,7 +65,7 @@ function! FMLAddDescription(src, mappings)
   let lines_with_index = map(deepcopy(src_lines), '[v:key, v:val]') 
   let comments_by_id = {}
   for [idx, line] in lines_with_index
-    let lhs = matchlist(line, '\c\m^\(\a*\)map.*<leader>\(\S\+\)')
+    let lhs = matchlist(line, '\c\m^\(\a\?\)\a*map.*<leader>\(\S\+\)')
     if(!empty(lhs))
       let prev_line = src_lines[idx - 1]
       let comment = matchlist(prev_line, '^"\s*\(.*\)')
