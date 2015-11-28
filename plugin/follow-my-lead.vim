@@ -78,8 +78,17 @@ function! FMLAddDescription(src, mappings)
 endfunction
 
 function! FMLFormatMappings(source, mappings)
-  let formatted = map(a:mappings, 'printf("    %1s | %-5s | %s", v:val.mode, v:val.lhs, get(v:val, "desc", v:val.rhs))')
+  let mapping_width = FMLCalcMappingWidth(a:mappings)
+  let formatted = map(a:mappings, 'printf("    %1s | %-' . mapping_width . 's | %s", v:val.mode, v:val.lhs, get(v:val, "desc", v:val.rhs))')
   return a:source. "\n" . repeat('-', strchars(a:source)) . "\n\n" . join(formatted, "\n")
+endfunction
+
+function! FMLCalcMappingWidth(mappings)
+  let mapping_width = 1
+  for val in a:mappings
+    let mapping_width = max([mapping_width, strlen(val.lhs)])
+  endfor
+  return mapping_width
 endfunction
 
 function! FMLClose()
