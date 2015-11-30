@@ -91,17 +91,11 @@ function! FMLCalcMappingWidth(mappings)
   return mapping_width
 endfunction
 
-function! FMLClose()
-  unlet s:fml_bufnr
-  bdelete
-endfunction
-
 function! FMLShow()
   let formattedMappings = join(map(FMLGetLeaderMappingsBySource(), 'FMLFormatMappings(v:val.source, v:val.mappings)'), "\n\n")
 
-  if(exists('s:fml_bufnr'))
+  if(exists('s:fml_bufnr') && bufwinnr(s:fml_bufnr) != -1)
     execute bufwinnr(s:fml_bufnr) . 'wincmd w'
-    execute 'normal ggdG'
   else
     new
     " Make it an unlisted scratch buffer
@@ -110,10 +104,12 @@ function! FMLShow()
     setlocal noswapfile
     setlocal nobuflisted
 
-    nnoremap <buffer> <silent> q :call FMLClose()<cr>
+    nnoremap <buffer> <silent> q :bdelete<cr>
+    silent file [Follow My Lead]
     let s:fml_bufnr = bufnr('%')
   endif
 
+  normal! ggdG
   put =formattedMappings
   normal! gg
 
